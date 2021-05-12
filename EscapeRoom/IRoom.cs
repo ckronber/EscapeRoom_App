@@ -10,7 +10,7 @@ namespace EscapeRoom
     {
         string RoomName { get; }
         //RoomObject Object();
-        List<RoomObject> RoomObjects {get;}
+        List<RoomObject> RoomObjects {get;} 
     }
 
     public class Room1 : IRoom
@@ -22,7 +22,7 @@ namespace EscapeRoom
         }
 
         public string RoomName => "Office";
-        public List<RoomObject> RoomObjects { get; set; }
+        public List<RoomObject> RoomObjects { get; set; } = new List<RoomObject>(); //initializes the list
     }
 
     public class Room2 : IRoom
@@ -34,7 +34,7 @@ namespace EscapeRoom
             this.LockBox = lockBox;
         }
         public string RoomName => "Dining Room";
-        public List<RoomObject> RoomObjects { get; set; }
+        public List<RoomObject> RoomObjects { get; set; } = new List<RoomObject>(); //initializes the list
 
         public LockBoxStuff LockBox { get; set; }
     }

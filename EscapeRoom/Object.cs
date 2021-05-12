@@ -31,15 +31,14 @@ namespace EscapeRoom
             else
             {
                 hasOpened = true;
-                Console.WriteLine($"You opened {TypeofObject} and has a Code {objCode}");
+                Console.WriteLine($"You opened {TypeofObject} and has a Code : {objCode}");
             }
         }
     }
 
     public class LockBoxStuff
     {
-        //public LockBoxStuff() { }
-
+        
         public Dictionary<int, string> CodeMaster { get; set; }
       
         public string userEnteredText { get; set; }

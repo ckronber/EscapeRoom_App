@@ -9,38 +9,34 @@ namespace EscapeRoom
 {
     public class ProgramUI
     {
-        private bool _foundExit = false;
-        //string _ExitCode = "";
+        public bool _foundExit = false;
         Dictionary<string, int> solutionToSafe = new Dictionary<string, int> { };
         LockBoxStuff NewLockBox = new LockBoxStuff();
-
-     
 
     public void Run()
         {
             //Setup - can add to class later
             NewLockBox.CodeMaster = new Dictionary<int, string>
             {
-                {0,"H"},{1,"E"},{2,"L"},{3,"L"},{ 4,"O"}
+                {0,"H"},{1,"E"},{2,"L"},{3,"L"},{ 4,"O"}  // code for getting out of the lockbox
             };
 
             NewLockBox.GetCode();
 
             Room1 officeRoom = new Room1();
-            RoomObject desk = new RoomObject(ObjectType.Desk,NewLockBox.CodeMaster[2]+ "-2");
             Room2 diningRoom = new Room2();
 
-            officeRoom.RoomObjects.Add(desk);
+            officeRoom.RoomObjects.Add(new RoomObject(ObjectType.Desk, NewLockBox.CodeMaster[2] + " - 2"));
             NewLockBox.CodeMaster.Remove(2);
-            officeRoom.RoomObjects.Add(new RoomObject(ObjectType.Dresser, NewLockBox.CodeMaster[4] + "- 4"));
+            officeRoom.RoomObjects.Add(new RoomObject(ObjectType.Dresser, NewLockBox.CodeMaster[4] + " - 4"));
             NewLockBox.CodeMaster.Remove(4);
-            officeRoom.RoomObjects.Add(new RoomObject(ObjectType.Window, NewLockBox.CodeMaster[3] + "- 3"));
+            officeRoom.RoomObjects.Add(new RoomObject(ObjectType.Window, NewLockBox.CodeMaster[3] + " - 3"));
             NewLockBox.CodeMaster.Remove(3);
 
-            diningRoom.RoomObjects.Add(new RoomObject(ObjectType.Dinette, NewLockBox.CodeMaster[1] + "- 1"));
-            NewLockBox.CodeMaster.Remove(1);
-            diningRoom.RoomObjects.Add(new RoomObject(ObjectType.Trashcan, NewLockBox.CodeMaster[0] + "- 0"));
-            NewLockBox.CodeMaster.Remove(0);
+            diningRoom.RoomObjects.Add(new RoomObject(ObjectType.Dinette, NewLockBox.CodeMaster[1] + " - 1"));
+            //NewLockBox.CodeMaster.Remove(1);
+            diningRoom.RoomObjects.Add(new RoomObject(ObjectType.Trashcan, NewLockBox.CodeMaster[0] + " - 0"));
+            //NewLockBox.CodeMaster.Remove(0);
 
             diningRoom.LockBox = NewLockBox;
 
@@ -55,7 +51,7 @@ namespace EscapeRoom
             int val = 1;
             bool goToLockBox = true;
 
-            while (!_foundExit)
+            while (_foundExit != true)
             {
                 
                 Console.Clear();
@@ -67,16 +63,19 @@ namespace EscapeRoom
                     {
                         Console.WriteLine("You just selected desk.");
                         officeRoom.RoomObjects[0].Open();
+                        readKey();
                     }
                     else if (objects == "dresser")
                     {
                         Console.WriteLine("You just selected dresser.");
                         officeRoom.RoomObjects[1].Open();
+                        readKey();
                     }
                     else if (objects == "window")
                     {
                         Console.WriteLine("You just selected window.");
                         officeRoom.RoomObjects[2].Open();
+                        readKey();
                     }
                     foreach(RoomObject room in officeRoom.RoomObjects)
                     {
@@ -99,12 +98,14 @@ namespace EscapeRoom
                     if (input == "trashcan")
                     {
                         Console.WriteLine("You have just selected trashcan.");
-                        diningRoom.RoomObjects[0].Open();
+                        diningRoom.RoomObjects[1].Open();
+                        readKey();
                     }
                     else if (input == "dinette")
                     {
                         Console.WriteLine("You have just selected dinette.");
                         diningRoom.RoomObjects[0].Open();
+                        readKey();
                     }
                     foreach(RoomObject room in diningRoom.RoomObjects)
                     {
@@ -125,13 +126,19 @@ namespace EscapeRoom
                         "==================================================");
 
                     //saved for the end
-                    bool _foundExit = diningRoom.LockBox.Open();
+                      _foundExit = diningRoom.LockBox.Open();
                     if (_foundExit)
                         Console.WriteLine("\n\nCongrats! You got out");
-                    Thread.Sleep(1000);
+                    Thread.Sleep(2000);
                 }
             }
+        }
 
+        //Method for pausing and reading key
+        public void readKey()
+        {
+            Console.WriteLine("Press a key to continue");
+            Console.ReadKey();
         }
     }
 }
