@@ -10,6 +10,7 @@ namespace EscapeRoom
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(120, 55);
             ProgramUI ERoom = new ProgramUI();
             ERoom.Run();
         }
