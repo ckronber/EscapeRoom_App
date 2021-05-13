@@ -32,6 +32,49 @@ namespace EscapeRoom
         \____/_| |_|\__\___|_|     \__|_| |_|\___|  \____/\___/ \__,_|\___|
 ";
 
+        string gameOver = @"
+        
+          ______    ______   __       __  ________         ______   __     __  ________  _______  
+         /      \  /      \ /  \     /  |/        |       /      \ /  |   /  |/        |/       \ 
+        /$$$$$$  |/$$$$$$  |$$  \   /$$ |$$$$$$$$/       /$$$$$$  |$$ |   $$ |$$$$$$$$/ $$$$$$$  |
+        $$ | _$$/ $$ |__$$ |$$$  \ /$$$ |$$ |__          $$ |  $$ |$$ |   $$ |$$ |__    $$ |__$$ |
+        $$ |/    |$$    $$ |$$$$  /$$$$ |$$    |         $$ |  $$ |$$  \ /$$/ $$    |   $$    $$< 
+        $$ |$$$$ |$$$$$$$$ |$$ $$ $$/$$ |$$$$$/          $$ |  $$ | $$  /$$/  $$$$$/    $$$$$$$  |
+        $$ \__$$ |$$ |  $$ |$$ |$$$/ $$ |$$ |_____       $$ \__$$ |  $$ $$/   $$ |_____ $$ |  $$ |
+        $$    $$/ $$ |  $$ |$$ | $/  $$ |$$       |      $$    $$/    $$$/    $$       |$$ |  $$ |
+         $$$$$$/  $$/   $$/ $$/      $$/ $$$$$$$$/        $$$$$$/      $/     $$$$$$$$/ $$/   $$/ 
+                                                                                          
+";
+
+        string youEscaped = @"
+        
+          ______    ______   __    __   ______   _______    ______   ________  ______   __                         
+         /      \  /      \ /  \  /  | /      \ /       \  /      \ /        |/      \ /  |                        
+        /$$$$$$  |/$$$$$$  |$$  \ $$ |/$$$$$$  |$$$$$$$  |/$$$$$$  |$$$$$$$$//$$$$$$  |$$ |                        
+        $$ |  $$/ $$ |  $$ |$$$  \$$ |$$ | _$$/ $$ |__$$ |$$ |__$$ |   $$ |  $$ \__$$/ $$ |                        
+        $$ |      $$ |  $$ |$$$$  $$ |$$ |/    |$$    $$< $$    $$ |   $$ |  $$      \ $$ |                        
+        $$ |   __ $$ |  $$ |$$ $$ $$ |$$ |$$$$ |$$$$$$$  |$$$$$$$$ |   $$ |   $$$$$$  |$$/                         
+        $$ \__/  |$$ \__$$ |$$ |$$$$ |$$ \__$$ |$$ |  $$ |$$ |  $$ |   $$ |  /  \__$$ | __                         
+        $$    $$/ $$    $$/ $$ | $$$ |$$    $$/ $$ |  $$ |$$ |  $$ |   $$ |  $$    $$/ /  |                        
+         $$$$$$/   $$$$$$/  $$/   $$/  $$$$$$/  $$/   $$/ $$/   $$/    $$/    $$$$$$/  $$/                         
+                                                                                                           
+                                                                                                           
+                                                                                                           
+         __      __  ______   __    __        ________   ______    ______    ______   _______   ________  _______  
+        /  \    /  |/      \ /  |  /  |      /        | /      \  /      \  /      \ /       \ /        |/       \ 
+        $$  \  /$$//$$$$$$  |$$ |  $$ |      $$$$$$$$/ /$$$$$$  |/$$$$$$  |/$$$$$$  |$$$$$$$  |$$$$$$$$/ $$$$$$$  |
+         $$  \/$$/ $$ |  $$ |$$ |  $$ |      $$ |__    $$ \__$$/ $$ |  $$/ $$ |__$$ |$$ |__$$ |$$ |__    $$ |  $$ |
+          $$  $$/  $$ |  $$ |$$ |  $$ |      $$    |   $$      \ $$ |      $$    $$ |$$    $$/ $$    |   $$ |  $$ |
+           $$$$/   $$ |  $$ |$$ |  $$ |      $$$$$/     $$$$$$  |$$ |   __ $$$$$$$$ |$$$$$$$/  $$$$$/    $$ |  $$ |
+            $$ |   $$ \__$$ |$$ \__$$ |      $$ |_____ /  \__$$ |$$ \__/  |$$ |  $$ |$$ |      $$ |_____ $$ |__$$ |
+            $$ |   $$    $$/ $$    $$/       $$       |$$    $$/ $$    $$/ $$ |  $$ |$$ |      $$       |$$    $$/ 
+            $$/     $$$$$$/   $$$$$$/        $$$$$$$$/  $$$$$$/   $$$$$$/  $$/   $$/ $$/       $$$$$$$$/ $$$$$$$/  
+                                                                                                           
+                                                                                                           
+                                                                                                           
+
+";
+
         public void Run()
         {
             //Setup - can add to class later
@@ -82,34 +125,48 @@ namespace EscapeRoom
                 if (inRoomOne)
                 { Console.WriteLine("You have now entered Room 1. Choose an object: desk, dresser, or window:");
                     string objects = Console.ReadLine().ToLower();
-                    if (objects == "desk")
+                    if (objects.Contains("desk"))
                     {
-                        Console.WriteLine("You just selected desk.");
                         officeRoom.RoomObjects[0].Open();
                         readKey();
                     }
-                    else if (objects == "dresser")
+                    else if (objects.Contains("dresser"))
                     {
-                        Console.WriteLine("You just selected dresser.");
                         officeRoom.RoomObjects[1].Open();
                         readKey();
                     }
-                    else if (objects == "window")
+                    else if (objects.Contains("window"))
                     {
-                        Console.WriteLine("You just selected window.");
                         officeRoom.RoomObjects[2].Open();
                         readKey();
                     }
                     else
                     {
-                        if(counter <= 2)
+                        if (counter >= 5 && counter <10)
+                        {
+                            Console.Clear();
                             Console.WriteLine("You must type either: desk, dresser, or window");
-                        else if (counter <= 4)
+                            readKey();
+                        }
+                        else if (counter >= 10 && counter < 18)
+                        {
+                            Console.Clear();
                             Console.WriteLine("You really dont get the concept of this game. Are you using your brain?");
-                        else
-                            Console.WriteLine("You have brain damage. GO TO A DOCTOR!");
+                            readKey();
+                        }
+                        else if(counter >= 18)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("You have brain damage. GO TO A DOCTOR! \n" +
+                                "GAME WILL END NOW!!!!!!");
+                            Thread.Sleep(2000);
 
-                        counter++;
+                            Console.Clear();
+                            Console.WriteLine(gameOver);
+                            readKey();
+                            _foundExit = true;
+                        }
+                       counter++;
                     }
                     inRoomOne = false;
                     foreach(RoomObject room in officeRoom.RoomObjects)
@@ -135,15 +192,13 @@ namespace EscapeRoom
                     Console.Clear();
                     Console.WriteLine("You have now entered Room 2. Choose an object: trashcan or dinette.");
                     string input = Console.ReadLine().ToLower();
-                    if (input == "dinette")
+                    if (input.Contains("dinette"))
                     {
-                        Console.WriteLine("You have just selected dinette.");
                         diningRoom.RoomObjects[0].Open();
                         readKey();
                     }
-                    else if (input == "trashcan")
+                    else if (input.Contains("trashcan"))
                     {
-                        Console.WriteLine("You have just selected trashcan.");
                         diningRoom.RoomObjects[1].Open();
                         readKey();
                     }
@@ -158,30 +213,39 @@ namespace EscapeRoom
                     }
                 }
 
-                counter = 0;
+                if (goToLockBox == true)
+                    counter = 0;
 
                 while(goToLockBox) //stays in a while loop until the correct code is entered
                 {
                     Console.Clear();
-                    Console.WriteLine(enterCode +
-                        "\n\n====================================================================================================");
-                      
-                      _foundExit = diningRoom.LockBox.Open();
+                    Console.WriteLine(enterCode);
+                    Console.WriteLine("\n====================================================================================================\n");
+                         _foundExit = diningRoom.LockBox.Open();
                     if (_foundExit)
                     {
-                        Console.WriteLine("\n\nCongrats! You got out");
-                        Thread.Sleep(2000);
+                        Console.Clear();
+                        Console.WriteLine(youEscaped);
+                        Thread.Sleep(3000);
                         goToLockBox = false;
                     }
-                    else if (counter > 10)
+                    else if (counter == 10)
+                    {
                         Console.WriteLine("You should just give up. You really are bad at remembering or just suck at this game\n" +
                             "Maybe you should go back to kindergarten.\n\n");
-                    else
+                        Thread.Sleep(2000);
+                        readKey();
+                    }
+                    else if(counter == 25)
                     {
                         Console.WriteLine("Just give up! you SUUUUUUCK! The GAME will exit now.");
+                        Thread.Sleep(3000);
+                        Console.Clear();
+                        Console.WriteLine(gameOver);
                         _foundExit = true;
                         goToLockBox = false;
                     }
+                    counter++;
                 }
             }
         }
